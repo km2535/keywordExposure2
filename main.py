@@ -35,9 +35,9 @@ def execute_monitoring_all_keywords(pages_to_check: int) -> dict:
         keyword_text = keyword_property[0].get("plain_text") if keyword_property and len(keyword_property) > 0 else None
         
         urls_list = []
-        original_url_property = properties.get("기존글url", {}).get("url")
+        original_url_property = properties.get("작성 글 URL", {}).get("url")
         if original_url_property:
-            urls_list.append(original_url_property)
+            urls_list.append(original_url_property.strip())
 
         if keyword_text:
             all_keywords_from_notion.append({

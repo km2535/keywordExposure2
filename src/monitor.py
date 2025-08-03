@@ -15,14 +15,16 @@ class KeywordMonitor:
     def normalize_url(url):
         from urllib.parse import urlparse
         parsed = urlparse(url)
-        # 쿼리 파라미터는 포함하되, fragment (#)는 제거
-        return parsed.netloc + parsed.path + ('?' + parsed.query if parsed.query else '')
+        # URL의 도메인(netloc)과 경로(path)만 사용하여 비교
+        # 프로토콜(scheme), 쿼리 파라미터, fragment는 모두 제거
+        return parsed.netloc + parsed.path
 
     def check_url_in_results(self, target_url: str, search_urls: list) -> bool:
         """주어진 URL이 검색 결과에 포함되는지 확인 (정규화된 URL 비교)"""
         normalized_target = self.normalize_url(target_url)
         for url_in_search_results in search_urls:
             if self.normalize_url(url_in_search_results) == normalized_target:
+                print("있음.")
                 return True
         return False
         

@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import time
 import random
 import logging # 로깅 임포트
+from urllib.parse import urlparse, urlunparse 
 
 class NaverScraper:
     def __init__(self):
@@ -127,16 +128,13 @@ class NaverScraper:
         # 네이버 카페/블로그 URL 정규화 (JWT 토큰 제거)
         normalized_urls = []
         for url in urls:
-            if 'cafe.naver.com' in url or 'blog.naver.com' in url:
-                base_url = url.split('?')[0]
-                if '=' in base_url:
-                    base_url = base_url.split('=')[0]
-                normalized_urls.append(base_url)
-            else:
-                normalized_urls.append(url)
+            parsed = urlparse(url)
+            # URL의 도메인(netloc)과 경로(path)만 사용하고 나머지는 제거
+            normalized_url = urlunparse(('', parsed.netloc, parsed.path, '', '', ''))
+            normalized_urls.append(normalized_url)
         
         unique_urls = list(dict.fromkeys(normalized_urls))
-        logging.info(f"총 {len(unique_urls)}개의 고유 URL을 추출했습니다.") # print 대신 logging 사용
+        logging.info(f"총 {len(unique_urls)}개의 고유 URL을 추출했습니다.")
         
         # 디버깅: 모든 URL 출력은 비활성화
         # if unique_urls:
