@@ -24,7 +24,6 @@ class KeywordMonitor:
         normalized_target = self.normalize_url(target_url)
         for url_in_search_results in search_urls:
             if self.normalize_url(url_in_search_results) == normalized_target:
-                print("있음.")
                 return True
         return False
         
