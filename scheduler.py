@@ -130,8 +130,8 @@ def run_email_report_scheduled():
 if __name__ == "__main__":
     logging.info("네이버 검색 노출 모니터링 스케줄러가 시작되었습니다.")
     
-    # schedule.every(SCHEDULER_INTERVAL).hours.do(run_monitoring_task)
-    schedule.every(1).minutes.do(run_monitoring_task)  # 테스트를 위해 1분으로 변경 (원래대로 돌리려면 위 라인 사용)
+    schedule.every(SCHEDULER_INTERVAL).hours.do(run_monitoring_task)
+    # schedule.every(1).minutes.do(run_monitoring_task)  # 테스트를 위해 1분으로 변경 (원래대로 돌리려면 위 라인 사용)
     
     schedule.every().day.at("07:00").do(run_email_report_scheduled)
     
