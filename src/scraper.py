@@ -13,6 +13,14 @@ class NaverScraper:
             'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
             'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
             'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0' 
+        ]
+        self.referers = [
+            "https://www.google.com/",
+            "https://www.bing.com/",
+            "https://search.yahoo.com/",
+            "https://duckduckgo.com/",
+            "https://www.youtube.com/"
         ]
         self.base_url = "https://search.naver.com/search.naver"
         self.session = self._create_session() # 클래스 생성 시 세션 객체 생성
@@ -30,7 +38,7 @@ class NaverScraper:
             "Cache-Control": "max-age=0",
             "Connection": "keep-alive",
             "User-Agent": random.choice(self.user_agents),
-            "Referer": "https://www.google.com/", # Referer 고정 또는 랜덤화
+            "Referer": random.choice(self.referers), # Referer를 랜덤화
         })
         
         # 재시도 전략 설정 (네트워크 오류 등에 대응)
