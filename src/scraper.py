@@ -100,7 +100,7 @@ class NaverScraper:
         if not soup:
             return []
 
-        links = soup.select('a.title_link, a.api_txt_lines, a.total_tit, a.sub_link, .total_tit a, a.fds-comps-right-image-text-title, a.dsc_link')
+        links = soup.select('a.title_link, .api_subject_bx a, a.api_txt_lines, a.total_tit, a.sub_link, .total_tit a, a.fds-comps-right-image-text-title, a.dsc_link')
         
         extracted_urls = set()
         for link in links:
